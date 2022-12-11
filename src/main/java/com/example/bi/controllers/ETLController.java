@@ -5,6 +5,7 @@ import com.example.bi.entities.DataInfo;
 import com.example.bi.helper.ExcelHelper;
 import com.example.bi.service.ETLService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,28 +19,26 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class ETLController {
 
     private final ETLService etlService;
 
-    @PostMapping(value = "api/file/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+    @PostMapping(value = "/api/file/upload")
+    public ResponseEntity<Void> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
         String message = "";
 
         if (ExcelHelper.hasExcelFormat(file)) {
             try {
                 etlService.save(file);
-
-                message = "Uploaded the file successfully: " + file.getOriginalFilename();
-                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+                log.info("Uploaded the file successfully: " + file.getOriginalFilename());
             } catch (Exception e) {
-                message = "Could not upload the file: " + file.getOriginalFilename() + "!" + e.getMessage();
-                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+                log.info("Could not upload the file: " + file.getOriginalFilename() + "!" + e.getMessage());
             }
         }
 
-        message = "Please upload an excel file!";
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
+        log.info("Please upload an excel file!");
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping(value = "api/file")

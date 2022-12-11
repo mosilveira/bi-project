@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -12,44 +13,46 @@
     <link href="../static/styles/main.css" th:href="@{/styles/main.css}" rel="stylesheet" />
     <title>CSCA - BI Portal</title>
 </head>
-<body>
 
+<body>
     <div class="container text-center mt-5">
         <div class="row align-items-center"></div>
         <div class="row align-items-center mt-5">
-            <div class="col">
-
-            </div>
+            <div class="col"></div>
             <div class="col">
                 <h1 class="text-white">Portal BI</h1>
-                <p  class="text-white">CSCA - BH</p>
+                <p class="text-white">CSCA - BH</p>
             </div>
-            <div class="col">
-
-            </div>
+            <div class="col"></div>
         </div>
         <div class="row align-items-center mt-5">
             <div class="col">
                 <h2 class="text-white">Deseja atualizar sua base de dados?</h2>
-                <form class="mt-3" method="POST" action="#" th:action="@{/api/file/upload}" enctype="multipart/form-data">
+                <form class="mt-3" method="POST" action="#" th:action="@{/api/file/upload}"
+                      enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="formFile" class="form-label text-white">Insira o arquivo no formato xls ou xlsx</label>
+                        <label for="formFile" class="form-label text-white">Insira o arquivo no formato xls ou
+                            xlsx</label>
                         <input class="form-control" type="file" id="formFile" name="file">
                     </div>
                     <button type="submit" class="btn btn-primary" onsubmit="event.preventDefault();">Enviar</button>
-                    <a th:href="@{/api/export-csv}" class="btn btn-success"><i class="fa fa-download"></i> Download CSV</a>
+                    <a th:href="@{/api/export-csv}" class="btn btn-outline-light"><i class="fa fa-download"></i> Download
+                        CSV</a>
                 </form>
-                <p class="text-white mt-3">* Após o download do arquivo CSV, será necessário acessar a fonte de dados do Looker Studio e alterar o arquivo. Manter o mesmo nome "data.csv"</p>
+                <p class="text-white mt-3">* Após o download do arquivo CSV, será necessário acessar a fonte de dados do
+                    Looker Studio e substituir o arquivo. Após esse processo, acessar o dashboard e selecionar a opção "Atualizar dados"</p>
+                <a class="text-white btn btn-success" href="https://datastudio.google.com/datasources/6a14f912-fc3e-49e0-8b5a-8116c2a9b7fa">Acessar fonte de dados</a>
             </div>
             <div class="col">
                 <iframe width="600" height="450"
                         src="https://datastudio.google.com/embed/reporting/0fc13630-b0c0-40b6-9ef6-45beccddc596/page/zP69C"
                         frameborder="0" style="border:0" allowfullscreen></iframe>
 
-                <a class="text-white" href="https://datastudio.google.com/reporting/0fc13630-b0c0-40b6-9ef6-45beccddc596/page/zP69C">Acessar o Looker Studio</a>
+                <a class="text-white"
+                   href="https://datastudio.google.com/reporting/0fc13630-b0c0-40b6-9ef6-45beccddc596/page/zP69C">Acessar o Looker Studio</a>
             </div>
         </div>
     </div>
-
 </body>
+
 </html>
